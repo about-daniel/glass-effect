@@ -21,9 +21,8 @@ export default function Scene() {
   }, []);
   return (
     <Canvas style={{ background: "#000000" }}>
-      <OrbitControls enableZoom={false} enablePan={false} />
       <Model />
-      <directionalLight intensity={2} position={[0, 2, 3]} />
+      <directionalLight intensity={100} position={[0, 2, 3]} />
       <Environment preset="city" />
     </Canvas>
   );
