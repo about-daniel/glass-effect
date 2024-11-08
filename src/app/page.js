@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 
 const Scene = dynamic(() => import("@/components/Scene"), {
   ssr: false,
@@ -7,7 +7,9 @@ const Scene = dynamic(() => import("@/components/Scene"), {
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Scene />
+      <div className={styles.webglWrapper}>
+        <Scene />
+      </div>
     </main>
   );
 }

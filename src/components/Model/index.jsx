@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 
 export default function Model() {
-  const { nodes } = useGLTF("/iveco.glb");
+  const { nodes, materials } = useGLTF("/375.glb");
   const { viewport } = useThree();
   const torus = useRef(null);
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Model() {
     }
   }, [nodes, torus]);
   useFrame(() => {
-    torus.current.rotation.z += 0.01;
+    torus.current.rotation.z -= 0.01;
   });
 
   // const materialProps = {
@@ -37,23 +37,21 @@ export default function Model() {
   });
 
   return (
-    <group scale={viewport.width / 3.75} position={[0, 0, 0]}>
-      <mesh ref={torus} {...nodes.iveco} position={[0, -0.5, -2]}>
-        <MeshTransmissionMaterial {...materialProps} polygonOffset={false} />
-      </mesh>
-
-      <Text
-        font={"/PPRightSans-CompactBlack.otf"}
-        position={[0, 0, -3]}
-        fontSize={1.4}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
+    <group dispose={null} scale={[3, 3, 3]}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Curve.geometry}
+        material={materials["Material.002"]}
+        position={[-0.011, -0.02, -0.007]}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={[10, 4.99, 10]}
+        ref={torus}
       >
-        SPEROTTO SPEROTTO
-      </Text>
+        <MeshTransmissionMaterial {...materialProps} />
+      </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/iveco.glb");
+useGLTF.preload("/375.glb");
